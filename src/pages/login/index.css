@@ -1,0 +1,27 @@
+.login-page {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.login-title {
+  padding-bottom: 3vh;
+}
+
+.login-form-container {
+  width: 30vw;
+  height: 60vh;
+  background-color: whitesmoke;
+  border-width: 2px;
+  border-radius: 10px;
+  padding-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+.login-error {
+  color: tomato;
+  font-size: 14px;
+}
