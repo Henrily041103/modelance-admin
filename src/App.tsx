@@ -1,12 +1,12 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login";
 import LoginWrapper from "./hooks/useLogin/loginContext";
 import AdminConsole from "./pages/console";
 import TransactionPage from "./pages/console/transactions";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <LoginPage />,

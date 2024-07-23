@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://henrily041103.github.io/modelance-admin/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
