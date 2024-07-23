@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
+  base: "/modelance-admin/",
   plugins: [react()],
   resolve: {
     alias: {
