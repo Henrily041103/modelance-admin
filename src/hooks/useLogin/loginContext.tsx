@@ -3,11 +3,12 @@ import { createContext, ReactNode, useState } from "react";
 export type LoginObject = {
   username: string;
   jwtToken: string;
+  avatar: string
 };
 
 type LoginContextProps = {
   loginObject?: LoginObject;
-  login?: (username: string, jwtToken: string) => boolean;
+  login?: (username: string, jwtToken: string, avatar: string) => boolean;
   logout?: () => boolean;
 };
 
@@ -20,8 +21,8 @@ type LoginWrapperProps = {
 export default function LoginWrapper({ children }: LoginWrapperProps) {
   const [loginObj, setLoginObj] = useState<LoginObject | undefined>();
 
-  const login = (username: string, jwtToken: string) => {
-    setLoginObj({ username, jwtToken });
+  const login = (username: string, jwtToken: string, avatar: string) => {
+    setLoginObj({ username, jwtToken, avatar });
     return true;
   };
 

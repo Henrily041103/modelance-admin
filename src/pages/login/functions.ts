@@ -26,7 +26,7 @@ export async function handleSubmit(
   username: string,
   password: string,
   setIncorrectLogin: (inc: boolean) => void,
-  login: (username: string, jwtToken: string) => boolean
+  login: (username: string, jwtToken: string, avatar: string) => boolean
 ) {
   const request = await axios.post<
     LoginOutput,
@@ -42,7 +42,7 @@ export async function handleSubmit(
     result.jwtToken &&
     result.account.role.roleName.toLowerCase() === "admin"
   ) {
-    login(result.account.username, result.jwtToken);
+    login(result.account.username, result.jwtToken, result.account.avatar);
     setIncorrectLogin(false);
     navigate("/console");
   } else {

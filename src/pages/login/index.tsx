@@ -44,7 +44,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-page">
-      <div className="login-form-container">
+      <div className="login-form-container bg-muted">
         <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight lg:text-5xl login-title">
           Log in
         </h1>
@@ -68,7 +68,11 @@ export default function LoginPage() {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Username..." {...field} />
+                    <Input
+                      className="bg-input"
+                      placeholder="Username..."
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -82,6 +86,7 @@ export default function LoginPage() {
                   <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
+                      className="bg-input"
                       placeholder="Password..."
                       {...field}
                       type="password"

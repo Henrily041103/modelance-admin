@@ -1,8 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./App.css";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from "./pages/login";
 import LoginWrapper from "./hooks/useLogin/loginContext";
+import AdminConsole from "./pages/console";
+import TransactionPage from "./pages/console/transactions";
 
 const router = createBrowserRouter([
   {
@@ -11,32 +13,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/console",
-    element: (
-      <div>
-        <div>Logged in</div>
-        <Outlet />
-      </div>
-    ),
+    element: <AdminConsole />,
     children: [
       {
         index: true,
         element: <div>Statistics page</div>,
       },
       {
-        path: "transactions",
-        element: <div>Transaction page</div>,
+        path: "transaction",
+        element: <TransactionPage />,
       },
       {
-        path: "account",
-        element: <div>Account page</div>,
+        path: "statistics",
+        element: <div>Statistics page</div>,
       },
       {
-        path: "job",
-        element: <div>Job page</div>,
+        path: "users",
+        element: <div>Users page</div>,
       },
       {
-        path: "contract",
-        element: <div>Contract page</div>,
+        path: "contracts",
+        element: <div>Contracts page</div>,
       },
     ],
   },

@@ -1,0 +1,66 @@
+.admin-console-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
+  height: 10vh;
+  display: flex;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  align-items: center;
+}
+
+.admin-console-title {
+  flex-grow: 3;
+  text-align: center;
+}
+
+.admin-console-account-container {
+  flex-grow: 9;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 5vw;
+  display: flex;
+}
+
+.admin-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 47px;
+}
+
+.admin-body {
+  display: flex;
+  flex-direction: row;
+  height: max-content;
+  min-height: 90vh;
+}
+
+.admin-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  row-gap: 2vh;
+  padding-top: 5vh;
+  transition: transform 0.3s ease;
+  align-self: stretch;
+}
+
+.admin-sidebar.invisible {
+  position: absolute;
+  transform: translateX(-100%);
+}
+
+.admin-sidebar.visible {
+  position: relative;
+  transform: translateX(0);
+}
+
+.admin-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 10;
+  align-items: center;
+  height: max-content;
+}
