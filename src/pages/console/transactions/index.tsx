@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { handleGetBank, handleGetTable } from "./functions";
+import { handleGetTable } from "./functions";
 import useLogin from "@/hooks/useLogin";
 import { DataTable } from "./tableDefs";
 import { columns } from "./tableRow";
