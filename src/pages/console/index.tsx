@@ -6,6 +6,7 @@ import { ArrowRight2, HambergerMenu } from "iconsax-react";
 import { Separator } from "@/components/ui/separator";
 import "./index.css";
 import { Outlet, useNavigate } from "react-router-dom";
+import logo from "/src/assets/logo.png";
 
 export type TabOptions = "transaction" | "statistics" | "users" | "contracts";
 
@@ -67,15 +68,8 @@ export default function AdminConsole() {
             </Button>
           </span>
           <span className="admin-console-title font-bold text-2xl">
+            <img className="admin-console-title-logo" src={logo} />
             ADMIN DASHBOARD
-          </span>
-          <span className="admin-console-account-container">
-            <span className="font-medium text-m">
-              Admin: {loginObject.username}
-            </span>
-            <span className="admin-avatar-container">
-              <img src={loginObject.avatar} className="admin-avatar" />
-            </span>
           </span>
         </div>
 

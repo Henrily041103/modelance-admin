@@ -14,20 +14,10 @@
 .admin-console-title {
   flex-grow: 3;
   text-align: center;
-}
-
-.admin-console-account-container {
-  flex-grow: 9;
-  justify-content: flex-end;
   align-items: center;
-  column-gap: 5vw;
   display: flex;
-}
-
-.admin-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 47px;
+  column-gap: 5vw;
+  padding-left: 2vw;
 }
 
 .admin-body {
@@ -63,4 +53,8 @@
   flex-grow: 10;
   align-items: center;
   height: max-content;
+}
+
+.admin-console-title-logo {
+  height: 6vh;
 }

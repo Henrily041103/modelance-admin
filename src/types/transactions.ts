@@ -34,3 +34,23 @@ export type BankTransaction = {
     virtualAccountName: string;
     virtualAccountNumber: string;
 };
+
+export type TransactionListResponse = {
+    message: string,
+    transactions: Transaction[]
+}
+
+export type TransactionResponse = {
+    message: string,
+    transaction: Transaction
+}
+
+export type BankTransactionListResponse = {
+    message: string,
+    transactions: BankTransaction[]
+}
+
+export type BankTransactionResponse = {
+    message: string,
+    transaction: BankTransaction
+}

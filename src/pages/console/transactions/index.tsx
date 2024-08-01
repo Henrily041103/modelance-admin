@@ -14,17 +14,17 @@ export default function TransactionPage() {
       return result;
     },
   });
-  //   const bankData = useQuery({
-  //     queryKey: ["bank-transactions"],
-  //     queryFn: async () => {
-  //       const result = await handleGetBank(axios);
-  //       return result;
-  //     },
-  //   });
+    // const bankData = useQuery({
+    //   queryKey: ["bank-transactions"],
+    //   queryFn: async () => {
+    //     const result = await handleGetBank(axios);
+    //     return result;
+    //   },
+    // });
 
   return (
     <div className="container mx-auto py-10">
-      {tableData.data && <DataTable columns={columns} data={tableData.data} />}
+      {tableData.data && <DataTable columns={columns} data={tableData.data.transactions} />}
     </div>
   );
 }
