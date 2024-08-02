@@ -7,7 +7,10 @@ import {
 } from "@/types/transactions";
 import { AxiosInstance, AxiosResponse } from "axios";
 
-export const handleGetTable = async (axios: AxiosInstance) => {
+export const handleGetTable = async (
+  axios: AxiosInstance,
+  selectedType: string | null
+) => {
   const responses = await axios.get<
     TransactionListResponse,
     AxiosResponse<TransactionListResponse>
@@ -18,6 +21,19 @@ export const handleGetTable = async (axios: AxiosInstance) => {
     const dateB = new Date(b.datetime);
     return dateB.getTime() - dateA.getTime();
   });
+
+  if (selectedType === "wallet") {
+    return {
+      ...result,
+      transactions: result.transactions.filter((transaction) => !transaction.bank),
+    };
+  } else if (selectedType === "bank") {
+    return {
+      ...result,
+      transactions: result.transactions.filter((transaction) => transaction.bank),
+    };
+  } 
+
   return result;
 };
 
@@ -59,13 +75,11 @@ export const handleGetRenewals = async (axios: AxiosInstance) => {
   >("/admin/premium/renewals");
   const result = responses.data;
 
-  const bankMap: Record<string, PackPurchase> = {};
+  const renewalMap: Record<string, PackPurchase> = {};
 
-  console.log(result.packs)
   for (const a of result.packs) {
-    bankMap[a.id] = a;
+    renewalMap[a.id] = a;
   }
-  console.log(bankMap)
 
-  return bankMap;
+  return renewalMap;
 };

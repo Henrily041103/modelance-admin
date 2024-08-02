@@ -67,7 +67,7 @@ export default function AdminConsole() {
             </Button>
           </span>
           <span className="admin-console-title font-bold text-2xl">
-            <img className="admin-console-title-logo" src={logo} />
+            <img className="admin-console-title-logo" src={logo} alt="logo" />
             ADMIN DASHBOARD
           </span>
         </div>

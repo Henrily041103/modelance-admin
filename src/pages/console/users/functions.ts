@@ -7,14 +7,24 @@ import {
 } from "@/types/premium";
 import { AxiosInstance, AxiosResponse } from "axios";
 
-export const handleGetUsers = async (axios: AxiosInstance) => {
+export const handleGetUsers = async (axios: AxiosInstance, status?: StatusType, role?: string) => {
+  const url = "/admin/users";
+  const params: { [key: string]: string } = {};
+  if (status) {
+    params.status = status.statusName.toLowerCase();
+  }
+  if (role) {
+    params.role = role.toLowerCase();
+  }
   const responses = await axios.get<Account[], AxiosResponse<Account[]>>(
-    "/admin/users"
+    url,
+    { params }
   );
   const result = responses.data;
 
   return result;
 };
+
 
 export const handleGetPacks = async (axios: AxiosInstance) => {
   const responses = await axios.get<
@@ -23,14 +33,13 @@ export const handleGetPacks = async (axios: AxiosInstance) => {
   >("/admin/premium");
   const result = responses.data;
 
-  const bankMap: Record<string, Pack> = {};
+  const packMap: Record<string, Pack> = {};
 
-  for (const a of result.packs) {
-    bankMap[a.role.id] = a;
+  for (const pack of result.packs) {
+    packMap[pack.role.id] = pack;
   }
-  console.log(bankMap)
 
-  return bankMap;
+  return packMap;
 };
 
 export const handleGetRenewals = async (axios: AxiosInstance) => {
@@ -40,16 +49,16 @@ export const handleGetRenewals = async (axios: AxiosInstance) => {
   >("/admin/premium/renewals");
   const result = responses.data;
 
-  const bankMap: Record<string, PackPurchase[]> = {};
+  const renewalMap: Record<string, PackPurchase[]> = {};
 
-  for (const a of result.packs) {
-    if (!bankMap[a.account.id]) {
-      bankMap[a.account.id] = [];
+  for (const purchase of result.packs) {
+    if (!renewalMap[purchase.account.id]) {
+      renewalMap[purchase.account.id] = [];
     }
-    bankMap[a.account.id].push(a);
+    renewalMap[purchase.account.id].push(purchase);
   }
 
-  return bankMap;
+  return renewalMap;
 };
 
 export const handleToggleAccount = async (

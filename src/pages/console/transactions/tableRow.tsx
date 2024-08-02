@@ -163,15 +163,17 @@ export function getColumns(
             bankDisplay.trigger = <UsdCoin size={24} color="#555555" />;
           }
         }
-
         return (
           <TooltipProvider>
+            {" "}
             <Tooltip>
-              <TooltipTrigger>{bankDisplay.trigger}</TooltipTrigger>
+              {" "}
+              <TooltipTrigger>{bankDisplay.trigger}</TooltipTrigger>{" "}
               <TooltipContent>
-                <p>{bankDisplay.text}</p>
-              </TooltipContent>
-            </Tooltip>
+                {" "}
+                <p>{bankDisplay.text}</p>{" "}
+              </TooltipContent>{" "}
+            </Tooltip>{" "}
           </TooltipProvider>
         );
       },
