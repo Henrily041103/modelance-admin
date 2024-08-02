@@ -13,7 +13,6 @@ export type Transaction = {
     orderCode: number;
     amount: number;
     bank: boolean;
-    walletId: string;
 };
 
 export type BankTransaction = {

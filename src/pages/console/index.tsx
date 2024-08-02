@@ -8,7 +8,7 @@ import "./index.css";
 import { Outlet, useNavigate } from "react-router-dom";
 import logo from "/src/assets/logo.png";
 
-export type TabOptions = "transaction" | "statistics" | "users" | "contracts";
+export type TabOptions = "transaction" | "statistics" | "users";
 
 type SidebarButtonProps = {
   text: TabOptions;
@@ -47,7 +47,6 @@ export default function AdminConsole() {
     "transaction",
     "statistics",
     "users",
-    "contracts",
   ];
 
   useEffect(() => {

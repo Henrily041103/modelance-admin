@@ -1,4 +1,9 @@
-import { TransactionListResponse } from "@/types/transactions";
+import { Account } from "@/types/general";
+import {
+  BankTransaction,
+  BankTransactionListResponse,
+  TransactionListResponse,
+} from "@/types/transactions";
 import { AxiosInstance, AxiosResponse } from "axios";
 
 export const handleGetTable = async (axios: AxiosInstance) => {
@@ -15,11 +20,33 @@ export const handleGetTable = async (axios: AxiosInstance) => {
   return result;
 };
 
-// export const handleGetBank = async (axios: AxiosInstance) => {
-//   const responses = await axios.get<
-//     BankTransaction[],
-//     AxiosResponse<BankTransaction[]>
-//   >("/admin/transactions/bank");
-//   const result = responses.data;
-//   return result;
-// };
+export const handleGetUsers = async (axios: AxiosInstance) => {
+  const responses = await axios.get<Account[], AxiosResponse<Account[]>>(
+    "/admin/users"
+  );
+  const result = responses.data;
+
+  const userMap: Record<string, Account> = {};
+
+  for (const a of result) {
+    userMap[a.id] = a;
+  }
+
+  return userMap;
+};
+
+export const handleGetBank = async (axios: AxiosInstance) => {
+  const responses = await axios.get<
+    BankTransactionListResponse,
+    AxiosResponse<BankTransactionListResponse>
+  >("/admin/transactions/bank");
+  const result = responses.data;
+
+  const bankMap: Record<string, BankTransaction> = {};
+
+  for (const a of result.transactions) {
+    bankMap[a.orderCode] = a;
+  }
+
+  return bankMap;
+};

@@ -5,3 +5,7 @@
 .negative {
   color: darkred;
 }
+
+.detail-dialog-content {
+  height: 80vh;
+}
