@@ -11,6 +11,7 @@ export type Transaction = {
     status: string;
     datetime: string;
     orderCode: number;
+    id: string;
     amount: number;
     bank: boolean;
 };

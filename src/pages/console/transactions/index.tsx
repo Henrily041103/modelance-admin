@@ -1,9 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { handleGetBank, handleGetTable, handleGetUsers } from "./functions";
+import {
+  handleGetBank,
+  handleGetRenewals,
+  handleGetTable,
+  handleGetUsers,
+} from "./functions";
 import useLogin from "@/hooks/useLogin";
-import { DataTable } from "./tableDefs";
 import { getColumns } from "./tableRow";
 import "./index.css";
+import { DataTable } from "@/components/ui/fullTable";
 
 export default function TransactionPage() {
   const { axios } = useLogin();
@@ -27,16 +32,23 @@ export default function TransactionPage() {
     queryKey: ["bank"],
     queryFn: async () => {
       const result = await handleGetBank(axios);
-      // console.log(result)`
+      return result;
+    },
+  });
+
+  const packData = useQuery({
+    queryKey: ["renewal"],
+    queryFn: async () => {
+      const result = await handleGetRenewals(axios);
       return result;
     },
   });
 
   return (
     <div className="container mx-auto py-10">
-      {tableData.data && userData.data && bankData.data && (
+      {tableData.data && userData.data && bankData.data && packData.data && (
         <DataTable
-          columns={getColumns(userData.data, bankData.data)}
+          columns={getColumns(userData.data, bankData.data, packData.data)}
           data={tableData.data.transactions}
         />
       )}

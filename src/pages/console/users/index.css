@@ -1,0 +1,11 @@
+.positive {
+  color: green;
+}
+
+.negative {
+  color: darkred;
+}
+
+.detail-dialog-content {
+  height: 80vh;
+}

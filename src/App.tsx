@@ -5,6 +5,7 @@ import LoginPage from "./pages/login";
 import LoginWrapper from "./hooks/useLogin/loginContext";
 import AdminConsole from "./pages/console";
 import TransactionPage from "./pages/console/transactions";
+import UserPage from "./pages/console/users";
 
 const router = createHashRouter([
   {
@@ -29,7 +30,7 @@ const router = createHashRouter([
       },
       {
         path: "users",
-        element: <div>Users page</div>,
+        element: <UserPage />,
       },
       {
         path: "contracts",

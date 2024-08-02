@@ -1,4 +1,5 @@
 import { Account } from "@/types/general";
+import { PackPurchase, RenewalListResponse } from "@/types/premium";
 import {
   BankTransaction,
   BankTransactionListResponse,
@@ -47,6 +48,24 @@ export const handleGetBank = async (axios: AxiosInstance) => {
   for (const a of result.transactions) {
     bankMap[a.orderCode] = a;
   }
+
+  return bankMap;
+};
+
+export const handleGetRenewals = async (axios: AxiosInstance) => {
+  const responses = await axios.get<
+    RenewalListResponse,
+    AxiosResponse<RenewalListResponse>
+  >("/admin/premium/renewals");
+  const result = responses.data;
+
+  const bankMap: Record<string, PackPurchase> = {};
+
+  console.log(result.packs)
+  for (const a of result.packs) {
+    bankMap[a.id] = a;
+  }
+  console.log(bankMap)
 
   return bankMap;
 };

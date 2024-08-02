@@ -16,15 +16,19 @@ import {
   Clock,
   CloseCircle,
   Eye,
+  MessageQuestion,
   Profile,
   TickCircle,
+  UsdCoin,
   Wallet,
 } from "iconsax-react";
 import DetailDialog from "./detailDialog";
+import { PackPurchase } from "@/types/premium";
 
 export function getColumns(
   accountMap: Record<string, Account>,
-  bankMap: Record<string, BankTransaction>
+  bankMap: Record<string, BankTransaction>,
+  renewalMap: Record<string, PackPurchase>
 ) {
   const columns: ColumnDef<Transaction>[] = [
     {
@@ -104,49 +108,37 @@ export function getColumns(
       header: "Status",
       cell: ({ row }) => {
         const status = row.original.status;
+
+        const statusDisplay = {
+          text: "Unknown",
+          trigger: <MessageQuestion size={24} color="#37d67a" />,
+        };
+
         switch (status.toLowerCase()) {
           case "approved":
-            return (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <TickCircle size={24} color="#37d67a" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Approved</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            );
+            statusDisplay.text = "Approved";
+            statusDisplay.trigger = <TickCircle size={24} color="#37d67a" />;
+            break;
           case "pending":
-            return (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <Clock size={24} color="#dce775" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Pending</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            );
+            statusDisplay.text = "Approved";
+            statusDisplay.trigger = <Clock size={24} color="#37d67a" />;
+            break;
           case "cancelled":
-            return (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <CloseCircle size={24} color="#f47373" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Cancelled</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            );
-          default:
-            return status;
+            statusDisplay.text = "Cancelled";
+            statusDisplay.trigger = <CloseCircle size={24} color="#37d67a" />;
+            break;
         }
+
+        return (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>{statusDisplay.trigger}</TooltipTrigger>
+              <TooltipContent>
+                <p>{statusDisplay.text}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        );
       },
     },
     {
@@ -154,33 +146,34 @@ export function getColumns(
       header: "Type",
       cell: ({ row }) => {
         const bank = row.original.bank;
+        const bankDisplay = {
+          text: "Unknown",
+          trigger: <MessageQuestion size={24} color="#37d67a" />,
+        };
         if (bank) {
-          return (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Bank size={24} color="#555555" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Bank transaction</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          );
+          bankDisplay.text = "Bank transaction";
+          bankDisplay.trigger = <Bank size={24} color="#555555" />;
         } else {
-          return (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <Wallet size={24} color="#555555" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Wallet transaction</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          );
+          const packRenew = renewalMap[row.original.id];
+          if (!packRenew) {
+            bankDisplay.text = "Wallet transaction";
+            bankDisplay.trigger = <Wallet size={24} color="#555555" />;
+          } else {
+            bankDisplay.text = "Premium renewal";
+            bankDisplay.trigger = <UsdCoin size={24} color="#555555" />;
+          }
         }
+
+        return (
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>{bankDisplay.trigger}</TooltipTrigger>
+              <TooltipContent>
+                <p>{bankDisplay.text}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        );
       },
     },
     {
