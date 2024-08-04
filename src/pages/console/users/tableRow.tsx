@@ -113,7 +113,7 @@ export function getColumns(
         }
         const purchaseData = {
           text: "No purchases",
-          trigger: <CloseCircle size={24} color="#555555" />,
+          trigger: <CloseCircle size={24} color="#EA4335" />,
         };
         if (purchase) {
           const date = getDifferenceInDays(
@@ -122,10 +122,10 @@ export function getColumns(
           );
           if (date > 30) {
             purchaseData.text = "Late renewal";
-            purchaseData.trigger = <Clock size={24} color="#555555" />;
+            purchaseData.trigger = <Clock size={24} color="#FBBC05" />;
           } else {
             purchaseData.text = "Have premium";
-            purchaseData.trigger = <TickCircle size={24} color="#555555" />;
+            purchaseData.trigger = <TickCircle size={24} color="#34A853" />;
           }
         }
 
@@ -148,9 +148,9 @@ export function getColumns(
         const user = row.original;
         const statusIcon =
           user.status.statusName === "inactive" ? (
-            <CloseCircle size={24} color="#555555" />
+            <CloseCircle size={24} color="#EA4335" />
           ) : (
-            <TickCircle size={24} color="#555555" />
+            <TickCircle size={24} color="#4285F4" />
           );
 
         return (
