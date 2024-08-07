@@ -12,7 +12,10 @@ export type PackPurchase = {
   id: string;
   account: {
     id: string;
-    role: string;
+    role: {
+      id: string;
+      roleName: string;
+    };
   };
   packId: string;
   renewalDate: string;
