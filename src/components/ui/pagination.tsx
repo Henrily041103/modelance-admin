@@ -46,20 +46,8 @@ export default function Pagination<TData>({ table }: PaginationProps<TData>) {
         />
       );
     }
-  } else if (currentPage <= 3) {
-    for (let i = 0; i < maxEntryLength; i++) {
-      pageArray.push(
-        <PaginationButton
-          display={i + 1}
-          isDisabled={currentPage === i + 1}
-          onClick={() => {
-            setCurrentPage(i + 1);
-            table.setPageIndex(i);
-          }}
-        />
-      );
-    }
-    pageArray.push(
+  } else {
+    const goToButton = (
       <Popover>
         <PopoverTrigger>
           <PaginationButton display={"..."} />
@@ -69,6 +57,7 @@ export default function Pagination<TData>({ table }: PaginationProps<TData>) {
             onSubmit={(event) => {
               event.preventDefault();
               table.setPageIndex(pageJumpIndex - 1);
+              setCurrentPage(pageJumpIndex)
             }}
           >
             <Input
@@ -80,6 +69,26 @@ export default function Pagination<TData>({ table }: PaginationProps<TData>) {
         </PopoverContent>
       </Popover>
     );
+
+    if (currentPage > 2) {
+      pageArray.push(goToButton)
+    }
+
+    for (let i = currentPage - 1 > 0 ? currentPage - 2 : 0; i < currentPage + 1 && i < maxEntryLength; i++) {
+      pageArray.push(
+        <PaginationButton
+          display={i + 1}
+          isDisabled={currentPage === i + 1}
+          onClick={() => {
+            setCurrentPage(i + 1);
+            table.setPageIndex(i);
+          }}
+        />
+      );
+    }
+    if (currentPage <= maxEntryLength - 2) {
+      pageArray.push(goToButton);
+    }
   }
 
   return (
